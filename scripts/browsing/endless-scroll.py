@@ -1,14 +1,12 @@
 import selenium
 import selenium.webdriver
 import time
+from selenium.webdriver.firefox.options import Options
 
-# See: https://selenium-python.readthedocs.io/waits.html#explicit-waits
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-# Setup automated driver. Currently headful.
-driver = selenium.webdriver.Firefox()
+# Setup headless browser using Firefox
+driver_options = Options()
+driver_options.headless = True
+driver = webdriver.Firefox(options=driver_options)
 
 # Base url and extension for scrolling
 BASE_URL = 'https://twitter.com'
