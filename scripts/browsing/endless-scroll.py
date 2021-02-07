@@ -6,7 +6,7 @@ from selenium.webdriver.firefox.options import Options
 # Setup headless browser using Firefox
 driver_options = Options()
 driver_options.headless = True
-driver = webdriver.Firefox(options=driver_options)
+driver = selenium.webdriver.Firefox(options=driver_options)
 
 # Base url and extension for scrolling
 BASE_URL = 'https://twitter.com'
