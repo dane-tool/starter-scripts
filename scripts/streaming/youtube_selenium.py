@@ -3,13 +3,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys 
+from selenium.webdriver.firefox.options import Options
 # from random import randint
 import numpy as np
 import time
 
-options = webdriver.ChromeOptions() 
-options.add_argument("start-maximized")
-driver = driver=webdriver.Chrome(chrome_options=options, executable_path=r'C:\Users\dania\Downloads\chromedriver_win32\chromedriver.exe')
+# Setup headless browser using Firefox
+driver_options = Options()
+driver_options.headless = True
+driver = webdriver.Firefox(options=driver_options)
  
 # Head to the site
 baseurl = 'https://youtube.com'
