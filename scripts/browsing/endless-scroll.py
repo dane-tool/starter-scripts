@@ -1,12 +1,6 @@
-import selenium
-import selenium.webdriver
-import time
-from selenium.webdriver.firefox.options import Options
+from . import driver, By, WebDriverWait, Condition, Keys
 
-# Setup headless browser using Firefox
-driver_options = Options()
-driver_options.headless = True
-driver = selenium.webdriver.Firefox(options=driver_options)
+import time
 
 # Base url and extension for scrolling
 BASE_URL = 'https://twitter.com'
@@ -14,6 +8,8 @@ EXTENSION_URL = '/search?q=ucsd&src=typed'
 
 
 driver.get(BASE_URL + EXTENSION_URL)
+
+print(f'At {driver.current_url}')
 
 # Driver keeps scrolling on webpage
 for i in range(1,100):

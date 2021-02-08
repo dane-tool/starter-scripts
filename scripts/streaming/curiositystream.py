@@ -1,21 +1,11 @@
+# Our webdriver is set up in the parent `driver` module.
+from . import driver, By, WebDriverWait, Condition, Keys
+
 import dotenv
 import os
 import random
-import selenium
-import selenium.webdriver
 import time
 import urllib.parse as up
-
-# See: https://selenium-python.readthedocs.io/waits.html#explicit-waits
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-
-# Setup automated driver. Currently headful.
-#
-# NOTE: I'm using some visibility checks... not sure if those will be messed up
-# with headless browsing. Maybe try changing to presence checks isntead.
-driver = selenium.webdriver.Firefox()
 
 BASEURL = 'https://curiositystream.com'
 
@@ -44,7 +34,7 @@ email_field, pass_field = wait.until(
     # This uses the concept of a 'locator' -- instead of directly asking the
     # driver to get us some elements, we're just passing the location of the
     # elements as a tuple: (By.TAG_NAME, 'input')
-    EC.visibility_of_all_elements_located((By.TAG_NAME, 'input'))
+    Condition.visibility_of_all_elements_located((By.TAG_NAME, 'input'))
 )
 
 # And now populate those fields by sending keys.
@@ -77,7 +67,7 @@ submit_botton.click()
 # make sure the dom has them registered. I originally tried to wait for them to
 # be visible -- but some of them are off the page (d'oh)!
 video_links = wait.until(
-    EC.presence_of_all_elements_located((By.CSS_SELECTOR, 'a[href^="/video"'))
+    Condition.presence_of_all_elements_located((By.CSS_SELECTOR, 'a[href^="/video"'))
 )
 
 # We'll choose a random video then go to its url.
@@ -89,7 +79,7 @@ driver.get(target_video.get_attribute('href'))
 
 # Finally, wait for the player to be visible then click it to play!
 player = wait.until(
-    EC.visibility_of_element_located((By.CLASS_NAME, 'player'))
+    Condition.visibility_of_element_located((By.CLASS_NAME, 'player'))
 )
 player.click()
 
