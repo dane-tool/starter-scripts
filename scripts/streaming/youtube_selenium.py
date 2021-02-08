@@ -16,13 +16,14 @@ search_field = wait.until(
 
 search_field.send_keys("dragon ball super")
 search_field.send_keys(Keys.RETURN)
+time.sleep(5)
 
 # Wait for videos to be available, then click on a random one to start watching
 videos = wait.until(
    Condition.presence_of_all_elements_located((By.CSS_SELECTOR, 'a#thumbnail'))
 )
 rand_vid = videos[random.randrange(len(videos))]
-rand_vid.click()
+driver.get(rand_vid.get_attribute('href'))
 time.sleep(5)
 
 # To prevent YouTube from stopping our autoplay, we periodically scroll a bit.
