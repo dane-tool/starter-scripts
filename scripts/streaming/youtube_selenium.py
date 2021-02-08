@@ -11,7 +11,7 @@ import time
 # Setup headless browser using Firefox
 driver_options = Options()
 driver_options.headless = True
-driver = selenium.webdriver.Firefox(options=driver_options)
+driver = webdriver.Firefox(options=driver_options)
  
 # Head to the site
 baseurl = 'https://youtube.com'
