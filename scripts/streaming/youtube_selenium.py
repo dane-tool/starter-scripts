@@ -4,8 +4,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys 
 from selenium.webdriver.firefox.options import Options
-# from random import randint
-import numpy as np
+import random
 import time
 
 # Setup headless browser using Firefox
@@ -30,7 +29,7 @@ search_field.send_keys(Keys.RETURN)
 
 
 videos = driver.find_elements_by_css_selector('a#thumbnail')
-rand_vid = np.random.choice(videos)
+rand_vid = videos[random.randrange(len(videos))]
 rand_vid.click()
 time.sleep(5)
 while True:
