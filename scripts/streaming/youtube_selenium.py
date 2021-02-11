@@ -30,6 +30,16 @@ time.sleep(5)
 #
 # Also get a sense of what page we're at.
 while True:
-    print(f'At {driver.current_url}')
-    time.sleep(1800)
-    driver.execute_script("window.scrollBy(0, 50);")
+   
+   # If the video hasn't started playing we can hit the play button!
+   player_status = driver.execute_script(
+      "return document.getElementById('movie_player').getPlayerState()"
+   )
+   # A status of -1 means it hasn't started yet
+   if player_status == -1:
+      player = driver.find_element_by_id('movie_player')
+      player.click()
+
+   print(f'At {driver.current_url}')
+   time.sleep(200)
+   driver.execute_script("window.scrollBy(0, 50);")
