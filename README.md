@@ -1,6 +1,6 @@
-# Selenium scripts for automated web browsing
+# DANE Client Starter Scripts
 
-Emulating/automating web browsing behavior for watching streaming content and general internet browsing.
+Selenium scripts for automated endless web browsing and watching videos. To be used as client behaviors in the [DANE tool][dane].
 
 ## Setup
 
@@ -35,8 +35,12 @@ Emulating/automating web browsing behavior for watching streaming content and ge
 To run a specific script, you must run it as a module like so:
 
 ```
-python -m scripts.streaming.curiositystream
+python -m streaming.curiositystream
 ```
+
+This is what causes `driver.py` to be run -- that way all scripts can utilize the same base driver definition (you don't need to write it multiple times if you want to make a tweak!)
+
+Note that if you're calling this script from another directly you'll need to pass the path to the file separated by periods rather than slashes (to keep with the Python module rules). E.g. `path.to.starter-scripts.streaming.curiositystream`.
 
 ## References
 
@@ -48,3 +52,5 @@ python -m scripts.streaming.curiositystream
   [Selenium Explicit Waits Documentation][selenium-waits] -- often we need to wait for page content to load
 - [bs4]: https://www.crummy.com/software/BeautifulSoup/bs4/doc/
   [BeautifulSoup4 Documentation][bs4] -- page parsing (unused so far)
+
+[dane]: https://github.com/dane-tool/dane
