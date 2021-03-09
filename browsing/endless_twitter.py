@@ -1,9 +1,15 @@
-from . import driver, By, WebDriverWait, Condition, Keys
-
 import random
 import time
 
-time.sleep(3)
+import selenium
+import selenium.webdriver
+
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.keys import Keys
+# See: https://selenium-python.readthedocs.io/waits.html#explicit-waits
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as Condition
 
 # List of things to search, when no search results left
 search_list = ['college', 'san%20diego', 'hiking', 'stocks']
@@ -11,6 +17,26 @@ search_list = ['college', 'san%20diego', 'hiking', 'stocks']
 # Base url and extension for scrollingß
 BASE_URL = 'https://twitter.com'
 EXTENSION_URL = '/search?q={search}&src=typed'
+
+
+# Setup headless browser using Firefox
+driver_options = Options()
+driver_options.headless = True
+
+# It's important we set height and width arguments otherwise page content won't
+# render correctly and we can't do things like scroll the full page height!
+#
+# Actually, this doesn't do anything for Firefox... see below
+driver_options.add_argument('--height 900')
+driver_options.add_argument('--width 1600')
+
+driver = selenium.webdriver.Firefox(options=driver_options)
+
+# We can set the height here
+driver.set_window_size(height=900, width=1600)
+
+# Set an implicit wait for all elements not immediately found
+driver.implicitly_wait(10)
 
 driver.get(BASE_URL + EXTENSION_URL.format(search = 'ucsd'))
 

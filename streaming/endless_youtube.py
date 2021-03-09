@@ -1,10 +1,3 @@
-# Driver
-# ======
-#
-# This is the base module that all scripts will import from. Basically, we just
-# set up the web driver in here, along with an desired options (e.g. Firefox or,
-# Chrome, headless, height and width, etc)
-#
 import selenium
 import selenium.webdriver
 
@@ -21,7 +14,7 @@ import os
 
 # Setup headless browser using Firefox
 driver_options = Options()
-driver_options.headless = False
+driver_options.headless = True
 
 # It's important we set height and width arguments otherwise page content won't
 # render correctly and we can't do things like scroll the full page height!
@@ -36,7 +29,7 @@ current_path = os.getcwd()
 driver = selenium.webdriver.Firefox(options=driver_options)
 
 # Installs youtube nonstop firefox extension to succesfully autoplay videos
-driver.install_addon(current_path + '/streaming/youtube_nonstop-0.8.2-fx.xpi', temporary=True)
+driver.install_addon(current_path + '/../extensions/youtube_nonstop-0.8.2-fx.xpi', temporary=True)
 
 # We can set the height here
 driver.set_window_size(height=900, width=1600)
@@ -74,20 +67,6 @@ def ensure_playing():
             "document.getElementById('movie_player').nextVideo()"
         )
 
-# def click_player():
-
-#     player = wait.until(
-#         Condition.presence_of_element_located((By.ID, 'movie_player'))
-#     )
-
-#     # -1 means no ad. If it's anything else, don't click! It could pull us to
-#     # a new tab and really mess things up.
-#     if not is_ad():
-#         player.click()
-#     else:
-#         pass
-
-
 baseurl = 'https://www.youtube.com/watch?v=DqbOgx_FCbw&list=PL6aq1PBlrtR5D4xslD4VBos7zk0GSTuBb'
 driver.get(baseurl)
 
@@ -100,8 +79,6 @@ time.sleep(5)
 while True:
 
     current()
-    # click_player() # pause
     time.sleep(1)
     ensure_playing() # play
     time.sleep(random.randrange(5,18)*60)
-
