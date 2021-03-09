@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as Condition
 
 import time
 import random
-import os
+from pathlib import Path
 
 # Setup headless browser using Firefox
 driver_options = Options()
@@ -23,13 +23,12 @@ driver_options.headless = True
 driver_options.add_argument('--height 900')
 driver_options.add_argument('--width 1600')
 
-# Gets current path
-current_path = os.getcwd()
-
 driver = selenium.webdriver.Firefox(options=driver_options)
 
-# Installs youtube nonstop firefox extension to succesfully autoplay videos
-driver.install_addon(current_path + '/../extensions/youtube_nonstop-0.8.2-fx.xpi', temporary=True)
+# Installs youtube nonstop firefox extension to successfully autoplay videos
+path_to_scripts = Path(__file__).parent.parent.absolute()
+path_to_addon = Path(path_to_scripts, 'extensions/youtube_nonstop-0.8.2-fx.xpi')
+driver.install_addon(str(path_to_addon), temporary=True)
 
 # We can set the height here
 driver.set_window_size(height=900, width=1600)
